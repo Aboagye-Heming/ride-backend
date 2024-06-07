@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Notifications\LoginNeedsVerification;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -39,6 +42,8 @@ class LoginController extends Controller
             'phone' => 'required|numeric|min:10',
             'login_code' => 'required|numeric|between:111111,999999',
         ]);
+
+        $phone = '+' . ltrim($request->phone, '+');
 
         //find the user
 

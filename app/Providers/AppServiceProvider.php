@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use App\Notifications\TwilioChannel;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Notification::extend('twilio', function ($app) {
+            return new TwilioChannel();
+        });
     }
 }
